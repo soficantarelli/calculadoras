@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculadora</title>
+
+
+</head>
+
+<body>
+    <section>
+       <h1 id="Titulo">Conversor de números decimales a hexadecimal, binario</h1>
+        <form id="id_cnum" name="cnum">
+            <label id="id_Label_num ">Número
+                <input id="id_num " name="num" type="text">
+            </label>
+            <br>
+            <label id="label_op ">Sistema Numérico
+                <select id="id_op " name="opcion">
+                    <option value="0" selected>Elija un sistema</option>
+                    <option value="16">Hexadecimal</option>
+                    <option value="2">Binario</option>
+                </select>
+            </label>
+            <br>
+            <input type="button" onclick="Javascript:Convert(cnum, 'num', 'opcion', resultado) " value="Conversión" id="envio">
+        </form>
+        <p id="resultado"></p>
+    </section>
+
+
+    <script type="Text/JavaScript" language="JavaScript">
+    function Convert(f3, a, op, texto) {
+        var numero = f3.elements[a].value;
+        var sistema2 = f3.elements[op].value;
+        if (sistema2 != 0) {
+                     
+            resultado = Conversion(numero, sistema2);
+            alert(resultado); 
+            texto.textContent = conversion+"--->>> "+"Resultado: "+resultado;
+            return true;
+        }
+        else {
+            alert("Debe elegir un sistema inicial");
+            location.reload();
+            return;
+        }
+    }
+    function Conversion(a, op2) {
+        a=parseInt(a);
+
+        switch(op2) {
+           case "16": r = ConvertBase(a).from(10).to(16);
+           break;
+           case "2": r = ConvertBase(a).from(10).to(2);
+           break;
+            
+        };
+        return r;
+    }
+
+    (function(){
+
+        var ConvertBase = function (num) {
+            return {
+                from : function (baseFrom) {
+                    return {
+                        to : function (baseTo) {
+                            return parseInt(num, baseFrom).toString(baseTo);
+                        }
+                    };
+                }
+            };
+        };
+    
+        this.ConvertBase = ConvertBase;
+    
+    })(this);
+
+    </script>
+</body>
+
+</html>
